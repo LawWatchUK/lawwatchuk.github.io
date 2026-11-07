@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Law Watch UK</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --paper:#87CEEB;
+    --paper-raised:#EAF7FC;
+    --ink:#21231F;
+    --ink-soft:#5A5C51;
+    --ink-faint:#8B8B7E;
+    --seal:#2B4736;
+    --seal-soft:#E3E9E0;
+    --seal-line:#C6D2C3;
+    --amber:#95601D;
+    --amber-soft:#F1E4CF;
+    --red:#8C3A31;
+    --red-soft:#F0DDD8;
+    --slate:#3E5566;
+    --slate-soft:#DEE6EA;
+    --case:#5C4A72;
+    --case-soft:#E7E1ED;
+    --rule:#BFDEEA;
+    --rule-strong:#9FCBDC;
+    --shadow: 0 1px 2px rgba(20,50,66,0.10), 0 4px 14px rgba(20,50,66,0.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1B1C17;
+      --paper-raised:#232420;
+      --ink:#EEEBDF;
+      --ink-soft:#B4B0A0;
+      --ink-faint:#7D796C;
+      --seal:#7FB596;
+      --seal-soft:#25332A;
+      --seal-line:#3B4F41;
+      --amber:#DDA660;
+      --amber-soft:#3A2F1D;
+      --red:#DE9184;
+      --red-soft:#3C231F;
+      --slate:#8FB0C4;
+      --slate-soft:#243138;
+      --case:#C0AAD9;
+      --case-soft:#332B40;
+      --rule:#39392F;
+      --rule-strong:#4A4A3B;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 18px rgba(0,0,0,0.25);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1B1C17;
+    --paper-raised:#232420;
+    --ink:#EEEBDF;
+    --ink-soft:#B4B0A0;
+    --ink-faint:#7D796C;
+    --seal:#7FB596;
+    --seal-soft:#25332A;
+    --seal-line:#3B4F41;
+    --amber:#DDA660;
+    --amber-soft:#3A2F1D;
+    --red:#DE9184;
+    --red-soft:#3C231F;
+    --slate:#8FB0C4;
+    --slate-soft:#243138;
+    --case:#C0AAD9;
+    --case-soft:#332B40;
+    --rule:#39392F;
+    --rule-strong:#4A4A3B;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 18px rgba(0,0,0,0.25);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Public Sans', system-ui, -apple-system, sans-serif;
+    padding:0 20px 64px;
+  }
+  .wrap{max-width:920px; margin:0 auto;}
+
+  header{
+    padding-block:36px 24px;
+    border-bottom:2px solid var(--ink);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    font-optical-sizing:auto;
+    font-size:clamp(28px, 4.5vw, 42px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    text-wrap:balance;
+    margin:0 0 12px;
+  }
+  header p.dek{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:60ch;
+    line-height:1.5;
+    margin:0 0 20px;
+  }
+
+  .stats{
+    display:flex;
+    gap:0;
+    border:1px solid var(--rule-strong);
+    border-radius:10px;
+    overflow:hidden;
+    background:var(--paper-raised);
+    flex-wrap:wrap;
+  }
+  .stat{
+    flex:1 1 140px;
+    padding:14px 18px;
+    border-right:1px solid var(--rule);
+  }
+  .stat:last-child{border-right:none;}
+  .stat .n{
+    font-family:'Fraunces', serif;
+    font-size:26px;
+    font-weight:600;
+    display:block;
+    line-height:1.1;
+  }
+  .stat .l{
+    font-size:12px;
+    color:var(--ink-soft);
+    letter-spacing:0.01em;
+  }
+
+  nav.filters{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:22px 0 8px;
+  }
+  nav.filters button{
+    font-family:'Public Sans', sans-serif;
+    font-size:13px;
+    font-weight:600;
+    padding:7px 14px;
+    border-radius:999px;
+    border:1px solid var(--rule-strong);
+    background:var(--paper-raised);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:background .15s, color .15s, border-color .15s;
+  }
+  nav.filters button:hover{border-color:var(--ink-faint);}
+  nav.filters button.active{
+    background:var(--ink);
+    border-color:var(--ink);
+    color:var(--paper);
+  }
+
+  .legend{
+    display:flex; gap:14px; flex-wrap:wrap;
+    font-size:12px; color:var(--ink-soft);
+    margin:14px 0 30px;
+    padding-top:14px;
+    border-top:1px solid var(--rule);
+  }
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .dot{width:8px; height:8px; border-radius:50%; display:inline-block;}
+
+  section.status-group{margin-bottom:34px;}
+  .status-group h2{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    font-size:12.5px;
+    letter-spacing:0.09em;
+    color:var(--ink-faint);
+    margin:0 0 14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .status-group h2::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--rule);
+  }
+
+  .card{
+    background:var(--paper-raised);
+    border:1px solid var(--rule);
+    border-left:3px solid var(--seal);
+    border-radius:8px;
+    padding:18px 20px;
+    margin-bottom:12px;
+    box-shadow:var(--shadow);
+  }
+  .card[data-status="bill"], .card[data-status="consultation"]{border-left-color:var(--red);}
+  .card[data-status="upcoming"]{border-left-color:var(--amber);}
+  .card[data-status="guidance"]{border-left-color:var(--slate);}
+  .card[data-status="watch"]{border-left-color:var(--ink-faint);}
+  .card[data-status="case"]{border-left-color:var(--case);}
+
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:8px;
+  }
+  .card-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:18px;
+    line-height:1.3;
+    margin:0;
+    text-wrap:balance;
+  }
+  .badges{display:flex; gap:6px; flex-wrap:wrap; align-items:center;}
+  .badge{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    padding:3px 8px;
+    border-radius:5px;
+    white-space:nowrap;
+  }
+  .badge.area-ts{background:var(--seal-soft); color:var(--seal);}
+  .badge.area-lic{background:var(--slate-soft); color:var(--slate);}
+  .badge.status-inforce{background:var(--seal-soft); color:var(--seal);}
+  .badge.status-upcoming{background:var(--amber-soft); color:var(--amber);}
+  .badge.status-bill{background:var(--red-soft); color:var(--red);}
+  .badge.status-consultation{background:var(--red-soft); color:var(--red);}
+  .badge.status-guidance{background:var(--slate-soft); color:var(--slate);}
+  .badge.status-watch{background:var(--rule); color:var(--ink-soft);}
+  .badge.status-case{background:var(--case-soft); color:var(--case);}
+  .badge.priority{background:var(--ink); color:var(--paper);}
+
+  .card p{
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--ink);
+    margin:0 0 10px;
+    max-width:70ch;
+  }
+  .card .meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px 16px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    border-top:1px solid var(--rule);
+    padding-top:9px;
+  }
+  .card .meta .date{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--ink-soft);
+  }
+  .card a{color:var(--seal); text-decoration:none; border-bottom:1px solid var(--seal-line);}
+  .card a:hover{border-bottom-color:var(--seal);}
+
+  footer{
+    margin-top:40px;
+    padding-top:20px;
+    border-top:2px solid var(--ink);
+    font-size:12.5px;
+    color:var(--ink-faint);
+    line-height:1.6;
+  }
+  footer strong{color:var(--ink-soft);}
+
+  @media (max-width:480px){
+    .card-top{flex-direction:column; align-items:flex-start;}
+    .stats{flex-direction:column;}
+    .stat{border-right:none; border-bottom:1px solid var(--rule);}
+    .stat:last-child{border-bottom:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Statute &amp; policy watch — Swindon TS &amp; Licensing</p>
+    <h1>Law &amp; Guidance Update Dashboard</h1>
+    <p class="dek">A working snapshot of legislation, secondary legislation, bills and guidance touching Trading Standards and Licensing in England, compiled from legislation.gov.uk, Parliament, gov.uk/OPSS and CTSI/LGA. Snapshot updated periodically; check the date at the foot of the page.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">7</span><span class="l">In force / recently commenced</span></div>
+      <div class="stat"><span class="n">5</span><span class="l">Bills &amp; consultations live</span></div>
+      <div class="stat"><span class="n">3</span><span class="l">Coming into force</span></div>
+      <div class="stat"><span class="n">5</span><span class="l">Court rulings &amp; appeals</span></div>
+      <div class="stat"><span class="n">5</span><span class="l">Guidance updated</span></div>
+      <div class="stat"><span class="n">2</span><span class="l">Longer-range watch</span></div>
+    </div>
+  </header>
+
+  <nav class="filters" id="filters">
+    <button class="active" data-filter="all">All items</button>
+    <button data-filter="ts">Trading Standards</button>
+    <button data-filter="lic">Licensing</button>
+    <button data-filter="case">Court rulings &amp; appeals</button>
+    <button data-filter="priority">Flagged for you</button>
+  </nav>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--red)"></i>Bill / consultation — not yet law</span>
+    <span><i class="dot" style="background:var(--amber)"></i>Coming into force</span>
+    <span><i class="dot" style="background:var(--seal)"></i>In force</span>
+    <span><i class="dot" style="background:var(--slate)"></i>Guidance updated</span>
+    <span><i class="dot" style="background:var(--ink-faint)"></i>Advisory / watch</span>
+    <span><i class="dot" style="background:var(--case)"></i>Court ruling / appeal</span>
+  </div>
+
+  <section class="status-group" data-group="bill">
+    <h2>Bills &amp; consultations in progress</h2>
+
+    <article class="card" data-status="consultation" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">Taxi &amp; PHV licensing consolidation — DfT consultation</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-consultation">Closed — response awaited</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>DfT consulted on cutting England's 263 taxi/PHV licensing authorities down to around 70 local transport authorities, aimed squarely at "out-of-area" working (drivers licensed in one area, operating almost entirely in another — Wolverhampton was cited at ~96%). Follows Baroness Casey's national audit on group-based child sexual exploitation, which flagged cross-border licensing as a safeguarding gap. The 12-week consultation closed 1 April 2026. No formal response yet, but in its 20 October 2026 response to the Transport Committee (below) government said it will respond on transferring licensing to local transport authorities by the end of 2026, and signalled that drivers "should ordinarily be licensed" where they mainly work, without yet committing to a statutory restriction. Directly upstream of any Swindon taxi/PHV policy review.</p>
+      <div class="meta"><span>Consultation closed 1 Apr 2026 · response promised by end 2026</span><span class="date"><a href="https://www.gov.uk/government/consultations/local-transport-authorities-and-the-licensing-of-taxis-and-private-hire-vehicles/local-transport-authorities-and-the-licensing-of-taxis-and-private-hire-vehicles" target="_blank" rel="noopener">gov.uk consultation ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="bill" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">National minimum standards for taxi/PHV licensing — government response &amp; draft Bill</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-bill">Govt response 20 Oct 2026 — draft Bill promised</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p><strong>Moved on this refresh.</strong> The government published its response to the Commons Transport Committee's "Raising the standard" report (10 June 2026, 18 recommendations) on 20 October 2026. Headlines: a draft Taxis and Private Hire Vehicles Bill will be published for pre-legislative scrutiny during the current session (no date yet), expected to cover enforcement responsibilities, out-of-area working and information-sharing between authorities, while keeping the taxi/PHV distinction. Core safety and safeguarding standards will be set nationally (using powers in the English Devolution and Community Empowerment Act 2026), with some local flexibility elsewhere — government only "partially agreed" with the Committee's warning that standards must not be "low by default". A national standards consultation is due before the end of 2026 and will cover mandatory in-vehicle CCTV (not yet decided), driver competence including English-language proficiency, and disability-awareness training. A national licensing database (valid licences, issuing authority, past refusals/suspensions/revocations) is in a discovery phase running autumn 2026 to spring 2027. On out-of-area working, government says drivers "should ordinarily be licensed" where they do most of their work but has not committed to a statutory restriction. This sets the direction for Swindon's taxi/PHV policy over the next 12–18 months; worth responding to the standards consultation when it opens.</p>
+      <div class="meta"><span>Report 10 Jun 2026 · govt response 20 Oct 2026 · standards consultation due by end 2026</span><span class="date"><a href="https://committees.parliament.uk/committee/153/transport-committee/news/218328/transport-committee-publishes-government-response-to-taxis-report/" target="_blank" rel="noopener">Transport Committee ↗</a> · <a href="https://www.taxi-point.co.uk/post/the-deep-dive-government-reveals-response-to-huge-taxi-licensing-reform-plans-covering-cctv-englis" target="_blank" rel="noopener">Taxi Point ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="bill" data-area="ts" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">UK product safety &amp; market surveillance overhaul</h3>
+        <div class="badges"><span class="badge area-ts">Trading Standards</span><span class="badge status-consultation">Closed — response awaited</span></div>
+      </div>
+      <p>OPSS-led consultation on a wholesale rewrite of the UK's post-Brexit product safety framework and market surveillance/enforcement powers, building on the powers created by the Product Regulation and Metrology Act 2025. Covers online marketplace liability, product categories left behind by GPSR divergence, and enforcement tools for local authority TS teams. Consultation ran 31 March–23 June 2026 and is now closed; a government response is still awaited as of this refresh.</p>
+      <div class="meta"><span>Consultation closed 23 Jun 2026 · response awaited</span><span class="date"><a href="https://www.gov.uk/government/consultations/product-regulation-the-uks-new-product-safety-framework/the-uks-new-product-safety-framework" target="_blank" rel="noopener">gov.uk consultation ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="consultation" data-area="ts" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">Premises closure orders — duration extended to 12 months</h3>
+        <div class="badges"><span class="badge area-ts">Trading Standards</span><span class="badge status-consultation">Power enacted — not yet commenced</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Home Office consultation proposed raising the maximum duration of a premises closure order under the Anti-social Behaviour, Crime and Policing Act 2014 from six months (three months plus a three-month extension) to twelve months, cutting the administrative burden of repeat court applications for persistently law-breaking premises. Consultation ran 22 June–31 July 2026; the Prime Minister then publicly committed to taking the change forward (12 August 2026), which CTSI — which had campaigned for it, citing near-universal support among its members — welcomed as "a victory for CTSI's recent campaigning." Update this refresh: the Crime and Policing Act 2026 (Royal Assent 29 April 2026) contains, at s.3(5), a power for the Secretary of State to amend the maximum duration of closure orders. Its Commencement No. 3 Regulations bring a wider set of ASB changes into force today, 26 October 2026: longer closure notices (ordinary 24→48 hours, enhanced 48→72 hours), longer dispersal directions (48→72 hours), and closure powers for registered social housing providers. But s.3(5) is <em>not</em> commenced by those regulations, so the 12-month closure order still awaits further commencement and regulations. CTSI notes the change would still not extend to county councils in two-tier areas or to Scotland, where closure-order powers remain more limited — worth watching if Swindon (a unitary authority) wants to make early use of the extended power once it lands.</p>
+      <div class="meta"><span>Crime and Policing Act 2026 s.3(5) not yet commenced · related notice changes in force 26 Oct 2026</span><span class="date"><a href="https://www.gov.uk/government/consultations/premises-closure-orders/increasing-the-duration-of-closure-orders-under-the-anti-social-behaviour-crime-and-policing-act-2014" target="_blank" rel="noopener">gov.uk consultation ↗</a> · <a href="https://wired-gov.net/wg/news.nsf/articles/CTSI+welcomes+Prime+Ministers+commitment+to+strengthen+closure+orders+12082026111500?open=" target="_blank" rel="noopener">CTSI ↗</a> · <a href="https://www.bevanbrittan.com/insights/articles/2026/crime-and-police-act-2026-one-month-to-go-is-your-organisation-ready/" target="_blank" rel="noopener">Bevan Brittan ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="bill" data-area="ts" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">Consumer Pricing Bill (loyalty-penalty pricing)</h3>
+        <div class="badges"><span class="badge area-ts">Trading Standards</span><span class="badge status-bill">Private Member's Bill</span></div>
+      </div>
+      <p>Presentation Bill sponsored by John Spellar MP that would ban offering better prices to new customers than existing ones. Passed second reading; has not yet reached committee stage — Private Members' Bills at this stage frequently stall without government time, so treat as a watch item rather than imminent law. No further progress identified this refresh.</p>
+      <div class="meta"><span>2nd reading passed · committee stage pending</span><span class="date"><a href="https://bills.parliament.uk/bills/3606" target="_blank" rel="noopener">Parliamentary Bills ↗</a></span></div>
+    </article>
+  </section>
+
+  <section class="status-group" data-group="case">
+    <h2>Court rulings &amp; appeals</h2>
+
+    <article class="card" data-status="case" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">R (application re TfL PHV licence renewal delays) — High Court permission granted</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-case">High Court</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Mr Justice Sweeting granted permission for judicial review of Transport for London's private hire licence renewal process, on evidence that around 17,000 drivers had experienced licence expiry while renewal applications were still pending, with reported financial hardship. The court held it arguable both that TfL must process renewals timeously to avoid interrupting lawful employment, and that TfL's own published guidance may create enforceable expectations about renewal timelines — believed to be the first case testing these points since the Private Hire Vehicles (London) Act 1998. TfL's statutory regime differs from most licensing authorities outside London (Swindon included), so this does not itself bind other authorities, but it is a live marker on how far a licensing authority's own turnaround-time guidance can become legally enforceable — worth watching through to full hearing.</p>
+      <div class="meta"><span>Permission granted 25 Jun 2026 · substantive hearing awaited</span><span class="date"><a href="https://www.taxi-point.co.uk/post/high-court-allows-landmark-challenge-to-tfl-private-hire-licence-renewal-system-following-delays-lea" target="_blank" rel="noopener">Taxi Point ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="case" data-area="lic" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">Private hire driver loses High Court appeal over email service of revocation notice</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-case">High Court</span></div>
+      </div>
+      <p>Sir Peter Lane upheld a licensing authority's email service of a licence-revocation notice as valid, rejecting the driver's claim that it had gone unseen in a spam folder — the email had also reached his solicitor, and he had later replied within the same chain. Confirms that email is a valid, sufficient method of service without prior agreement where the evidence supports actual or constructive receipt, that the 21-day statutory appeal window runs from the date of that service, and that courts will scrutinise "I never saw it" claims closely against the surrounding evidence. A useful reminder for Swindon licensing officers to keep clear records of what was sent, to whom, and any subsequent contact.</p>
+      <div class="meta"><span>Decided 19 Mar 2026</span><span class="date"><a href="https://www.localgovernmentlawyer.co.uk/licensing/399-licensing-news/100029-private-hire-driver-loses-appeal-to-high-court-over-service-of-notice-revoking-his-licence" target="_blank" rel="noopener">Local Government Lawyer ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="case" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">D.E.L.T.A. Merseyside Ltd v Uber Britannia Ltd [2025] UKSC 31</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-case">Supreme Court</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Supreme Court unanimously rejected Uber's argument that private hire operators outside London and Plymouth must contract as principal directly with passengers for every booking. The Local Government (Miscellaneous Provisions) Act 1976 imposes no such requirement, the Court held — leaving current PHV operator contracting models across England (Swindon included) undisturbed, at least until the licensing-reform proposals above are settled.</p>
+      <div class="meta"><span>Decided 29 Jul 2025</span><span class="date"><a href="https://www.localgovernmentlawyer.co.uk/licensing/399-licensing-news/61750-supreme-court-rejects-appeal-by-uber-over-private-hire-vehicle-contracting-regime-outside-london-and-plymouth" target="_blank" rel="noopener">Local Government Lawyer ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="case" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">Buckinghamshire Council v Nawaz — PHV licence refusal upheld</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-case">Crown Court</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Crown Court dismissed a driver's second appeal against non-renewal of his private hire licence over a poor driving record, finding no exceptional circumstances to depart from the council's safety-led policy — the council's 14th consecutive successful licensing appeal defence of 2025 (£39,026 in costs recovered). A useful current data point on how robustly courts are backing "fit and proper person" refusals and revocations. No further significant Supreme Court/Court of Appeal/High Court rulings on trading standards enforcement identified since the last refresh.</p>
+      <div class="meta"><span>Decided 10 Dec 2025</span><span class="date"><a href="https://www.buckinghamshire.gov.uk/news/crown-court-backs-council-decision-to-refuse-private-hire-licence" target="_blank" rel="noopener">Buckinghamshire Council ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="case" data-area="lic" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">Hope and Glory Public House Ltd v Westminster Magistrates' Court [2011] EWCA Civ 31</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-case">Leading authority</span></div>
+      </div>
+      <p>Not new, but still the governing Court of Appeal authority on licensing appeals: the appellant carries the burden of persuading the court that the licensing authority's decision was wrong, and the authority's original judgment is owed real weight rather than being reheard from scratch. Every "fit and proper person" appeal decision above — and any Swindon licensing appeal — is decided against this framework.</p>
+      <div class="meta"><span>[2011] EWCA Civ 31 · still leading authority</span><span class="date"><a href="https://www.localgovernmentlawyer.co.uk/licensing/316-licensing-features/52299-taxi-driver-licence-appeals-burden-of-proof" target="_blank" rel="noopener">Local Government Lawyer ↗</a></span></div>
+    </article>
+  </section>
+
+  <section class="status-group" data-group="upcoming">
+    <h2>Coming into force / secondary legislation awaited</h2>
+
+    <article class="card" data-status="upcoming" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">English Devolution and Community Empowerment Act 2026 — cross-border taxi/PHV suspension powers</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-upcoming">Enacted — commencement awaited</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Received Royal Assent 29 April 2026. Gives the Secretary of State powers to set national taxi and PHV standards (the basis for the standards consultation above), and creates a national enforcement framework letting licensing officers suspend, with immediate effect, a driver, vehicle or private hire operator licence issued by <em>another</em> authority where there is a serious public-safety concern, e.g. deliberate use of unlicensed drivers or vehicles. Government stresses the threshold is high and that working outside the issuing area is not in itself a safety risk; appeals and potential compensation apply where procedures are not followed. Newly surfaced on this refresh. A commencement date for the suspension powers was not found, so treat as pending until commencement regulations are made. Once live, Swindon officers could act against out-of-area vehicles working in the borough.</p>
+      <div class="meta"><span>Royal Assent 29 Apr 2026 · commencement date not yet confirmed</span><span class="date"><a href="https://www.localgovernmentlawyer.co.uk/governance/396-governance-news/100377-english-devolution-and-community-empowerment-bill-receives-royal-assent" target="_blank" rel="noopener">Local Government Lawyer ↗</a> · <a href="https://www.taxi-point.co.uk/post/cross-border-suspension-rules-what-will-new-national-taxi-enforcement-powers-mean-for-private-hire" target="_blank" rel="noopener">Taxi Point ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="upcoming" data-area="ts" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">Tobacco and Vapes Act 2026 — age verification regulations laid</h3>
+        <div class="badges"><span class="badge area-ts">Trading Standards</span><span class="badge status-upcoming">Regs laid — in force 1 Jan 2027</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Received Royal Assent 29 April 2026; introduces the progressive generational sales ban (no one born on or after 1 Jan 2009 may ever legally be sold tobacco), tighter vape flavour/packaging/display rules, and new powers for TS officers against non-compliant retailers, with mandatory local authority enforcement duties. The English/Welsh commencement picture has moved on this refresh: the Tobacco and Vapes Act 2026 (Age Verification Defence to Underage Sales) (England and Wales) Regulations were laid in September 2026, confirming the age-restriction sales offences and the retailer due-diligence defence take effect 1 January 2027. The defence requires either a physical ID document with recognised security features (photo, date of birth, hologram or UV feature) or a certified Digital Verification Service check at "medium confidence" or above — visual inspection of an unverified digital image is not enough. Scotland's own commencement and transitional regulations were already made (SSI 2026/210 and SSI 2026/213). CTSI has separately secured £10m of government funding for enforcement capacity (apprentice officers, illicit trade work).</p>
+      <div class="meta"><span>Royal Assent 29 Apr 2026 · age verification regs laid Sep 2026 · sales offences from 1 Jan 2027</span><span class="date"><a href="https://www.john-gaunt.co.uk/news/the-tobacco-and-vapes-act-2026-age-verification-defence-to-underage-sales-england-and-wales-regulations-2026" target="_blank" rel="noopener">John Gaunt &amp; Partners ↗</a> · <a href="https://www.legislation.gov.uk/ssi/2026/210/made" target="_blank" rel="noopener">Scotland SSI 2026/210 ↗</a> · <a href="https://www.local.gov.uk/parliament/briefings-and-responses/tobacco-and-vapes-act-faqs" target="_blank" rel="noopener">LGA FAQs ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="upcoming" data-area="ts" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">DMCC Act 2024 — subscription-contract regime now delayed to Spring 2027</h3>
+        <div class="badges"><span class="badge area-ts">Trading Standards</span><span class="badge status-upcoming">Delayed</span></div>
+      </div>
+      <p>Core Part 4 consumer protections (unfair commercial practices reform, drip pricing and fake review bans) came into force 6 April 2025 and remain in force — no change there. However the revamped subscription-contract regime (pre-contract information duties, cancellation rights, reminder notices before renewal) — previously expected to phase in through 2026 under Commencement No.3 Regulations (SI 2026/284) — has since been pushed back again by government to Spring 2027, following further industry consultation on implementation timing and a waiver request from some sectors. Worth flagging to any Swindon TS colleagues currently advising traders that the subscription rules were imminent this year. No further movement this refresh.</p>
+      <div class="meta"><span>Subscription regime now targeted Spring 2027</span><span class="date"><a href="https://www.legislation.gov.uk/uksi/2026/284/made" target="_blank" rel="noopener">SI 2026/284 ↗</a> · <a href="https://www.lewissilkin.com/en/insights/2026/04/02/consumer-law-update-subscriptions-regime-delayed-again-to-spring-2027-102mops" target="_blank" rel="noopener">Lewis Silkin ↗</a></span></div>
+    </article>
+  </section>
+
+  <section class="status-group" data-group="inforce">
+    <h2>In force / recently commenced</h2>
+
+    <article class="card" data-status="inforce" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">Private hire operators — statutory right to work checks on drivers</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-inforce">In force</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Under the Border Security, Asylum and Immigration Act 2025, from 1 October 2026 private hire operators are under a direct statutory duty to carry out right-to-work checks on the drivers they engage, sitting alongside — not replacing — existing local authority licensing checks. The Home Office says the change is meant to fix "ambiguity as to where accountability rests if illegal working is identified", particularly for app/platform-based operator models. Now live: worth checking with Swindon's licensed PHV operators that operator-level checks are running alongside (not instead of) the council's own driver-licensing due diligence.</p>
+      <div class="meta"><span>In force since 1 Oct 2026</span><span class="date"><a href="https://www.taxi-point.co.uk/post/private-hire-operators-face-legal-duty-to-carry-out-driver-right-to-work-checks-from-october" target="_blank" rel="noopener">Taxi Point ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="inforce" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">Gambling Commission deposit-limit rules — Remote Technical Standards, phase 2 now live</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-inforce">In force</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Updated Remote Gambling and Software Technical Standards require licensed remote operators to offer customers "gross deposit limits" — using only that label, given equal or greater prominence than other financial limits, on fixed time frames. Phase 1 took effect October 2025; phase 2 was due 30 June 2026 but the Commission pushed it back to 30 September 2026 after stakeholder feedback on technical development and compliance work. Directly relevant to operator compliance under GB gambling licences. The 30 September 2026 date has now passed and no further delay was reported; treated here as in force, though no Commission notice confirming commencement was found this refresh.</p>
+      <div class="meta"><span>Phase 2 from 30 Sep 2026 · no further delay reported</span><span class="date"><a href="https://www.gamblingcommission.gov.uk/news/article/implementation-extension-for-new-deposit-limit-requirements" target="_blank" rel="noopener">Gambling Commission ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="inforce" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">Digital ID for alcohol age verification — now in force</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-inforce">In force</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>The Licensing Act 2003 (Mandatory Licensing Conditions) (Amendment) Order 2026 came into force on 15 September 2026 — later than the original "Christmas 2025" commitment but ahead of the Autumn 2026 target given when the SI was laid. Staff at licensed premises may now accept certified digital ID for age verification, provided the premises has an agreement with a registered Digital Verification Service Provider meeting at least "medium confidence" under the DVS trust framework (tied to the Data (Use and Access) Act 2025). Adoption is entirely optional — physical ID remains a fully valid alternative — and existing safeguards against underage sales (fines, licence review, the due-diligence defence) are unchanged. The Office for Digital Identities and Attributes has since published further explanatory guidance (September 2026) clarifying that anyone may present digital ID regardless of appearance, that supervised self-service checkout use is permitted, and that verification must use privacy-preserving, data-minimised checks binding the credential to its presenter. Worth flagging to Swindon licensed premises and door staff as guidance beds in.</p>
+      <div class="meta"><span>In force since 15 Sep 2026</span><span class="date"><a href="https://www.gov.uk/government/news/new-rules-pave-the-way-for-businesses-to-adopt-digital-proof-of-age-for-alcohol-sales" target="_blank" rel="noopener">gov.uk ↗</a> · <a href="https://www.legislation.gov.uk/ukdsi/2026/9780348284980" target="_blank" rel="noopener">legislation.gov.uk ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="inforce" data-area="ts" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">Product Regulation and Metrology Act 2025</h3>
+        <div class="badges"><span class="badge area-ts">Trading Standards</span><span class="badge status-inforce">In force</span></div>
+      </div>
+      <p>Received Royal Assent August 2025. Gives ministers wide powers to update product safety and metrology rules by secondary legislation, independent of retained EU law, and to address online marketplace responsibilities. This is the enabling Act behind the OPSS product-safety-framework consultation above — most substantive change still arrives via the SIs it authorises.</p>
+      <div class="meta"><span>Royal Assent Aug 2025 · in force</span><span class="date"><a href="https://en.wikipedia.org/wiki/Product_Regulation_and_Metrology_Act_2025" target="_blank" rel="noopener">Act overview ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="inforce" data-area="lic" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">Licensing Hours Extensions Act 2026</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-inforce">In force</span></div>
+      </div>
+      <p>Royal Assent 12 February 2026 (c.4). Amends the Licensing Act 2003 so that licensing-hours orders — the kind made for national celebrations and one-off events — can be made by negative resolution SI rather than needing full affirmative approval, speeding up the process for future extensions.</p>
+      <div class="meta"><span>In force since 12 Feb 2026</span><span class="date"><a href="https://bills.parliament.uk/bills/3783" target="_blank" rel="noopener">Parliamentary Bills ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="inforce" data-area="ts" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">Price Marking (Amendment) Order 2025</h3>
+        <div class="badges"><span class="badge area-ts">Trading Standards</span><span class="badge status-inforce">In force</span></div>
+      </div>
+      <p>Statutory instrument amending the Price Marking Order 2004's unit-pricing and display requirements — the baseline TS officers check against on pricing-practices inspections, now sitting alongside the DMCC unfair-practices regime and CTSI's revised guidance below.</p>
+      <div class="meta"><span>Made 2025 · in force</span><span class="date"><a href="https://www.legislation.gov.uk/uksi/2025/592/made/data.xht" target="_blank" rel="noopener">legislation.gov.uk ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="inforce" data-area="ts" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">Gambling statutory levy — Gambling Commission rollout</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-inforce">Implementing</span></div>
+      </div>
+      <p>The statutory levy on gambling operators created under the 2023 Gambling Act White Paper is now being implemented by the Gambling Commission, with its 2026–27 business plan setting out the ongoing rollout of levy collection and research/prevention/treatment funding allocation.</p>
+      <div class="meta"><span>Ongoing rollout, 2026–27</span><span class="date"><a href="https://www.gamblingcommission.gov.uk/about-us/guide/business-plan-and-budget-2026-to-2027" target="_blank" rel="noopener">Gambling Commission ↗</a></span></div>
+    </article>
+  </section>
+
+  <section class="status-group" data-group="guidance">
+    <h2>Guidance updated</h2>
+
+    <article class="card" data-status="guidance" data-area="ts" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">CTSI Guidance for Traders on Pricing Practices — revised</h3>
+        <div class="badges"><span class="badge area-ts">Trading Standards</span><span class="badge status-guidance">Guidance</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>CTSI republished its Guidance for Traders on Pricing Practices to align with the DMCC Act's unfair-commercial-practices and drip-pricing rules — the reference document most TS pricing investigations will now be measured against.</p>
+      <div class="meta"><span>Updated 2025/26</span><span class="date"><a href="https://www.businesscompanion.info/en/guidance-for-traders-on-pricing-practices" target="_blank" rel="noopener">Business Companion ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="guidance" data-area="ts" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">Rogue-trader crackdown: Approved Code &amp; Trusted Payments Scheme</h3>
+        <div class="badges"><span class="badge area-ts">Trading Standards</span><span class="badge status-guidance">Voluntary scheme</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Government announced (28 August 2026) two voluntary consumer-protection schemes for home improvement work, developed with CTSI as a delivery partner: an Approved Code that traders can sign up to demonstrating higher standards on transparency, customer service and dispute resolution, and a Trusted Payments Scheme that holds building-project funds securely and releases them against project milestones. Prompted by CTSI data showing over one in four UK adults have had problems with home improvement work and £10.3bn lost to scams, overpricing and unfair practices in 2024. The Trusted Payments app launched the following week with a target of 100,000+ traders signed up by end of September 2026; the Approved Code is expected to be fully operational by December 2026. CTSI itself has continued to press for compulsory registration of home-repair tradespeople rather than a voluntary code alone — worth pointing Swindon consumers and traders to both schemes as they roll out, while noting neither is a licensing requirement.</p>
+      <div class="meta"><span>Announced 28 Aug 2026 · rolling out through autumn/winter 2026</span><span class="date"><a href="https://www.gov.uk/government/news/government-steps-in-to-protect-families-from-cowboy-builders-and-aggressive-bailiffs" target="_blank" rel="noopener">gov.uk ↗</a> · <a href="https://wired-gov.net/wg/news.nsf/articles/CTSI+welcomes+Governments+commitment+to+clamp+down+on+fraudulent+builders+28082026141000?open=" target="_blank" rel="noopener">CTSI ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="guidance" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">National Licensing Policy Framework — non-statutory steer for licensing authorities</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-guidance">Guidance</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Following the 2025 licensing "taskforce" review below, the Home Office and Department for Business and Trade published the National Licensing Policy Framework (26 November 2025) — non-statutory guidance for on-trade Licensing Act 2003 premises (pubs, restaurants, nightclubs, late-night refreshment) that licensing authorities "must have regard to" alongside their existing duties, without displacing them or creating new legal obligations. It asks authorities to weigh "the need to promote growth and deliver economic benefits" when making licensing decisions, and to explain at their next Statement of Licensing Policy review how they have taken account of it, as part of a stated aim to cut regulatory costs by 25%. Government has flagged it may pursue statutory change later (e.g. a growth-related licensing objective) depending on impact — a review of the framework was due six months after publication, i.e. around May 2026; no published outcome of that review has been found as of this refresh. The framework has continued to draw academic criticism over industry influence and reduced local accountability (Nicholls et al., <em>Addiction</em>, 2026). Relevant the next time Swindon's own Statement of Licensing Policy comes up for review.</p>
+      <div class="meta"><span>Published 26 Nov 2025 · 6-month review outcome not yet published</span><span class="date"><a href="https://www.localgovernmentlawyer.co.uk/licensing/399-licensing-news/99151-new-national-framework-urges-licensing-authorities-to-consider-need-to-promote-growth" target="_blank" rel="noopener">Local Government Lawyer ↗</a> · <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/add.70241" target="_blank" rel="noopener">Addiction journal ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="guidance" data-area="lic" data-priority="1">
+      <div class="card-top">
+        <h3 class="card-title">Section 182 guidance (Licensing Act 2003) — revised February 2026</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-guidance">Guidance</span><span class="badge priority">Flagged</span></div>
+      </div>
+      <p>Revised statutory guidance issued under s.182 of the Licensing Act 2003 for licensing authorities — the document that underpins how licensing committees and officers apply the Act's licensing objectives day to day. Still not updated to reflect the digital-ID condition or the National Licensing Policy Framework above; no further revision identified this refresh — worth checking again once DVS-provider guidance for licensing authorities beds in.</p>
+      <div class="meta"><span>Revised Feb 2026 · no further update this refresh</span><span class="date"><a href="https://www.gov.uk/government/publications/explanatory-memorandum-revised-guidance-issued-under-s-182-of-licensing-act-2003/revised-guidance-issued-under-section-182-of-the-licensing-act-2003-december-2023-accessible-version" target="_blank" rel="noopener">gov.uk ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="guidance" data-area="lic" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">DfT taxi/PHV licensing best practice guidance</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-guidance">Guidance</span></div>
+      </div>
+      <p>Standing best-practice guidance for taxi and PHV licensing authorities in England — the natural home for any national minimum standards once the Transport Committee's June 2026 recommendations (above) are taken up by government and legislated for, and now also the likely place any right-to-work-check signposting for operators (above) would be reflected. Worth re-checking once a government response to the Transport Committee report lands.</p>
+      <div class="meta"><span>Current edition</span><span class="date"><a href="https://www.gov.uk/government/publications/taxi-and-private-hire-vehicle-licensing-best-practice-guidance/taxi-and-private-hire-vehicle-licensing-best-practice-guidance-for-licensing-authorities-in-england" target="_blank" rel="noopener">gov.uk ↗</a></span></div>
+    </article>
+  </section>
+
+  <section class="status-group" data-group="watch">
+    <h2>Longer-range / advisory watch</h2>
+
+    <article class="card" data-status="watch" data-area="lic" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">Westminster "vertical drinking" licensing policy dispute</h3>
+        <div class="badges"><span class="badge area-lic">Licensing</span><span class="badge status-watch">Policy dispute</span></div>
+      </div>
+      <p>Westminster City Council is defending licensing policy proposals restricting standing/"vertical drinking" venues against claims they amount to a de facto ban. No national legislation yet, but a live test of how far a licensing authority's own Statement of Licensing Policy can go to manage cumulative-impact areas — relevant if Swindon's own policy review touches venue-type restrictions. No change this refresh.</p>
+      <div class="meta"><span>Ongoing dispute, 2026</span><span class="date"><a href="https://instituteoflicensing.org/" target="_blank" rel="noopener">Institute of Licensing ↗</a></span></div>
+    </article>
+
+    <article class="card" data-status="watch" data-area="ts" data-priority="0">
+      <div class="card-top">
+        <h3 class="card-title">Civil Aviation (Consumer Protection and Regulatory Reform) Bill [HL]</h3>
+        <div class="badges"><span class="badge area-ts">Trading Standards</span><span class="badge status-watch">Bill — adjacent</span></div>
+      </div>
+      <p>House of Lords bill reforming consumer protection and regulatory powers in civil aviation, now progressing through the Commons: Lords stages completed 20 July 2026, Commons second reading held 9 September 2026, with the Public Bill Committee's line-by-line scrutiny starting 20 October 2026 and a call for written evidence open now. Sector-specific rather than general trading standards law, but its consumer-protection drafting approach is being watched as a possible model for wider reform. No change this refresh.</p>
+      <div class="meta"><span>Commons committee stage from 20 Oct 2026 · call for evidence open</span><span class="date"><a href="https://www.parliament.uk/business/news/2026/september-2026/civil-aviation-consumer-protection-and-regulatory-reform-bill-hl-call-for-evidence/" target="_blank" rel="noopener">UK Parliament ↗</a></span></div>
+    </article>
+  </section>
+
+  <footer>
+    <p><strong>Snapshot taken 26 October 2026.</strong> This is a manually compiled research snapshot, not a live feed — legislative timelines shift often (secondary legislation dates in particular), and case law here covers only the significant appeals and rulings surfaced by this search, not a full law-report trawl. This refresh (since 29 September) recorded the government's 20 October 2026 response to the Transport Committee taxi report (draft Taxis and PHV Bill promised, national standards consultation and LTA-transfer response both due by end 2026, national driver database in discovery). It added the English Devolution and Community Empowerment Act 2026 cross-border suspension powers (enacted; commencement awaited). It also updated the closure-orders item: the Crime and Policing Act 2026 power is enacted, and related closure-notice and dispersal changes commence today, but the 12-month order power itself is not yet commenced. The PHV operator right-to-work duty (1 Oct) and Gambling Commission deposit-limit phase 2 (30 Sep) moved into "in force". The OPSS product safety consultation, Consumer Pricing Bill, Tobacco and Vapes Act regulations, DMCC subscription regime, Civil Aviation Bill and the court-rulings list were re-checked with no new developments found; no new significant TS or licensing appellate rulings were surfaced.</p>
+    <p>Sources: legislation.gov.uk · UK Parliament bills tracker (bills.parliament.uk) · gov.uk / OPSS / Home Office · Chartered Trading Standards Institute (tradingstandards.uk) · Local Government Association · Gambling Commission · Institute of Licensing (instituteoflicensing.org) · Local Government Lawyer · Taxi Point.</p>
+  </footer>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('#filters button');
+  const cards = document.querySelectorAll('.card');
+  const groups = document.querySelectorAll('.status-group');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+
+      cards.forEach(card => {
+        let show = true;
+        if (f === 'ts') show = card.dataset.area === 'ts';
+        else if (f === 'lic') show = card.dataset.area === 'lic';
+        else if (f === 'case') show = card.dataset.status === 'case';
+        else if (f === 'priority') show = card.dataset.priority === '1';
+        card.hidden = !show;
+      });
+
+      groups.forEach(group => {
+        const visible = group.querySelectorAll('.card:not([hidden])').length > 0;
+        group.hidden = !visible;
+      });
+    });
+  });
+</script>
+
+</body></html>
